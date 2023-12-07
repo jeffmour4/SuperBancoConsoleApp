@@ -8,21 +8,21 @@ namespace SuperBancoConsoleApp
 {
     internal class Customer
     {
-        public string name {  get; }
-        public string number { get; }
-        public double balance {  get; }
-        public string zipCode { get; set; }
+        public string Name {  get; }
+        public string Number { get; }
+        public double Balance { get; set; }
+        public string ZipCode { get; set; }
         public Customer(string name, string number, double balance, string zipCode) 
         { 
-            this.name = name;
-            this.number = number;
-            this.balance = balance;
-            this.zipCode = zipCode;
+            this.Name = name;
+            this.Number = number;
+            this.Balance = balance;
+            this.ZipCode = zipCode;
         }
         public override string ToString()
         {
-            return "Cliente: " + name + ". Número da conta: " + number
-                + ". Saldo: " + balance + ". CEP: " + zipCode;
+            return "Cliente: " + Name + ". Número da conta: " + Number
+                + ". Saldo: R$ " + string.Format("{0:N}", Balance) + ". CEP: " + ZipCode;
         }
     }
 }
