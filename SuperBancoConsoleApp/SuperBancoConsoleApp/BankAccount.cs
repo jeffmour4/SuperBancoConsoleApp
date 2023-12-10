@@ -1,33 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace SuperBancoConsoleApp
 {
     internal class BankAccount
     {
-        long TransactionNumber = 0;
-        List<Customer> customerList = new List<Customer>();
-        List<Transaction> transactionsList = new List<Transaction>();
+        private long transactionNumber = 0;
+        private List<Customer> customerList = new List<Customer>();
+        private List<Transaction> transactionsList = new List<Transaction>();
         public void AddCustomer(string name, double balance, string zipCode)
         {
+            int countList = customerList.Count;
             bool verify;
             string number;
-            string zip = string.Format("00.000-000", zipCode);
             do
             {
                 Random random = new Random();
                 number = Convert.ToString(random.Next(1, 1000000));
-                number = string.Format("0:D6", number);
                 verify = VerifyNumber(number);
             } while (!verify);
-            customerList.Add(new Customer(name, number, balance, zip));
-            Console.WriteLine($"Cliente {name}, conta {number}, adicionado com sucesso");
+            customerList.Add(new Customer(name, number, zipCode));
+            DepositMoney(number, balance, "Depósito inicial");
+            if (customerList.Count > countList)
+            {
+                Console.WriteLine($"Cliente {name}, conta {number}, adicionado com sucesso");
+            }
+            else 
+            {
+                Console.WriteLine("Cliente não adicionado");
+            }
         }
-        bool VerifyNumber(string number)
+        private bool VerifyNumber(string number)
         {
             bool result = true;
             foreach (Customer customer in customerList) 
@@ -76,10 +85,9 @@ namespace SuperBancoConsoleApp
             {
                 if (customer.Number.Equals(number))
                 {
-                    string zip = string.Format("{00.000-000}", zipCode);
-                    customer.ZipCode = zip;
+                    customer.ZipCode = zipCode;
                     confirmUpdate = true;
-                    Console.WriteLine($"CEP {customer.ZipCode} de Cliente conta {number} atualizado com sucesso");
+                    Console.WriteLine($"CEP {Convert.ToUInt32(customer.ZipCode).ToString(@"00\.000\-000")} de Cliente conta {number} atualizado com sucesso");
                     break;
                 }
             }
@@ -95,12 +103,20 @@ namespace SuperBancoConsoleApp
             {
                 if (customer.Number.Equals(number))
                 {
-                    DateTime date = DateTime.Now;
-                    GenerateTransaction(amount, date, description);
-                    customer.Balance += amount;
-                    confirmDeposit = true;
-                    Console.WriteLine($"Depósito realizado com sucesso. Novo saldo: R$ {customer.Balance}");
-                    break;
+                    if (amount > 0)
+                    {
+                        DateTime date = DateTime.Now;
+                        GenerateTransaction(number, amount, date, description);
+                        customer.Balance += amount;
+                        confirmDeposit = true;
+                        Console.WriteLine($"Depósito realizado com sucesso. Novo saldo: R$ {customer.Balance}");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Valor do depósito insuficiente");
+                        throw new ArgumentOutOfRangeException(nameof(amount), "O valor precisa ser maior que zero");
+                    }
                 }
             }
             if (!confirmDeposit)
@@ -117,8 +133,12 @@ namespace SuperBancoConsoleApp
                 {
                     if (customer.Balance >= amount)
                     {
+                        if (amount <= 0)
+                        {
+                            throw new ArgumentOutOfRangeException(nameof(amount), "O valor precisa ser maior que zero");
+                        }
                         DateTime date = DateTime.Now;
-                        GenerateTransaction(amount, date, description);
+                        GenerateTransaction(number, -amount, date, description);
                         customer.Balance -= amount;
                         confirmWithdrawal = true;
                         Console.WriteLine($"Saque realizado com sucesso. Novo saldo: R$ {customer.Balance}");
@@ -127,7 +147,7 @@ namespace SuperBancoConsoleApp
                     else
                     {
                         Console.WriteLine("Saldo insuficiente");
-                        break;
+                        throw new InvalidOperationException("O valor precisa ser menor ou igual ao saldo");
                     }
                 }
             }
@@ -136,12 +156,43 @@ namespace SuperBancoConsoleApp
                 Console.WriteLine($"Cliente {number} não encontrado");
             }
         }
-        long GenerateTransaction(double value, DateTime date, string description)
+        private void GenerateTransaction(string numberAccount, double value, DateTime date, string description)
         {
-            long number = TransactionNumber++;
-            transactionsList.Add(new Transaction(number, value, date, description));
-            return number;
+            transactionNumber++;
+            transactionsList.Add(new Transaction(transactionNumber, numberAccount, value, date, description));
         } 
-        
+        public void ListAllCustomers() 
+        {
+            if (customerList.Any()) 
+            {
+                StringBuilder stringBuilderCustomers = new StringBuilder();
+                foreach (Customer customer in customerList)
+                {
+                    stringBuilderCustomers.AppendLine(customer.ToString());
+                }
+                Console.WriteLine(stringBuilderCustomers.ToString());
+            }
+            else 
+            {
+                Console.WriteLine("Lista de clientes vazia");
+            }
+            
+        }
+        public void ListAllTransactions()
+        {
+            if (transactionsList.Any())
+            {
+                StringBuilder transactionListString = new StringBuilder();
+                foreach (Transaction transaction in transactionsList)
+                {
+                    transactionListString.AppendLine(transaction.ToString());
+                }
+                Console.WriteLine(transactionListString.ToString());
+            }
+            else
+            {
+                Console.WriteLine("Lista de Transações vazia");
+            }
+        }
     }
 }

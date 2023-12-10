@@ -1,0 +1,15 @@
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\bin\Debug\net8.0\SuperBancoConsoleApp.exe
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\bin\Debug\net8.0\SuperBancoConsoleApp.deps.json
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\bin\Debug\net8.0\SuperBancoConsoleApp.runtimeconfig.json
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\bin\Debug\net8.0\SuperBancoConsoleApp.dll
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\bin\Debug\net8.0\SuperBancoConsoleApp.pdb
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\obj\Debug\net8.0\SuperBancoConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\obj\Debug\net8.0\SuperBancoConsoleApp.AssemblyInfoInputs.cache
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\obj\Debug\net8.0\SuperBancoConsoleApp.AssemblyInfo.cs
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\obj\Debug\net8.0\SuperBancoConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\obj\Debug\net8.0\SuperBancoConsoleApp.sourcelink.json
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\obj\Debug\net8.0\SuperBancoConsoleApp.dll
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\obj\Debug\net8.0\refint\SuperBancoConsoleApp.dll
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\obj\Debug\net8.0\SuperBancoConsoleApp.pdb
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\obj\Debug\net8.0\SuperBancoConsoleApp.genruntimeconfig.cache
+C:\Users\jeffl\Documents\RepositoriosGit\SuperBancoConsoleApp\SuperBancoConsoleApp\SuperBancoConsoleApp\obj\Debug\net8.0\ref\SuperBancoConsoleApp.dll
